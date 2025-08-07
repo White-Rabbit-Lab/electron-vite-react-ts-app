@@ -5,30 +5,35 @@ function App(): React.JSX.Element {
   const ipcHandle = (): void => window.electron.ipcRenderer.send('ping')
 
   return (
-    <>
-      <img alt="logo" className="logo" src={electronLogo} />
-      <div className="creator">Powered by electron-vite</div>
-      <div className="text">
-        Build an Electron app with <span className="react">React</span>
-        &nbsp;and <span className="ts">TypeScript</span>
+    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-900 text-gray-100">
+      <img alt="logo" className="w-32 h-32 mb-8" src={electronLogo} />
+      <div className="text-sm text-gray-400 mb-4">Powered by electron-vite</div>
+      <div className="text-2xl font-semibold mb-6">
+        Build an Electron app with <span className="text-blue-400">React</span>
+        &nbsp;and <span className="text-blue-500">TypeScript</span>
       </div>
-      <p className="tip">
-        Please try pressing <code>F12</code> to open the devTool
+      <p className="text-gray-300 mb-8">
+        Please try pressing <code className="px-2 py-1 bg-gray-800 rounded text-sm">F12</code> to
+        open the devTool
       </p>
-      <div className="actions">
-        <div className="action">
-          <a href="https://electron-vite.org/" target="_blank" rel="noreferrer">
-            Documentation
-          </a>
-        </div>
-        <div className="action">
-          <a target="_blank" rel="noreferrer" onClick={ipcHandle}>
-            Send IPC
-          </a>
-        </div>
+      <div className="flex gap-4">
+        <a
+          href="https://electron-vite.org/"
+          target="_blank"
+          rel="noreferrer"
+          className="px-6 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors"
+        >
+          Documentation
+        </a>
+        <button
+          onClick={ipcHandle}
+          className="px-6 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors cursor-pointer"
+        >
+          Send IPC
+        </button>
       </div>
-      <Versions></Versions>
-    </>
+      <Versions />
+    </div>
   )
 }
 
