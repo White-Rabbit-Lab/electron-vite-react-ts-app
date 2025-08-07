@@ -7,6 +7,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 This is an Electron application with React and TypeScript, built using Vite and electron-vite for optimal development experience.
 
 ### Tech Stack
+
 - **Electron**: Desktop application framework
 - **React 19**: UI framework
 - **TypeScript**: Type-safe JavaScript
@@ -17,12 +18,14 @@ This is an Electron application with React and TypeScript, built using Vite and 
 ## Commands
 
 ### Development
+
 ```bash
 pnpm dev         # Start development server with hot reload
 pnpm start       # Preview built application
 ```
 
 ### Build & Quality
+
 ```bash
 # Linting and Type Checking (run before committing)
 pnpm lint               # Run all linters (ESLint, Prettier, TypeScript)
@@ -45,6 +48,7 @@ pnpm build:linux        # Build for Linux
 ## Architecture
 
 ### Directory Structure
+
 ```
 src/
 ├── main/           # Electron main process (Node.js environment)
@@ -60,11 +64,13 @@ src/
 ```
 
 ### Process Architecture
+
 - **Main Process**: Manages application lifecycle, creates browser windows, handles native APIs
-- **Renderer Process**: Runs React application in a sandboxed browser environment  
+- **Renderer Process**: Runs React application in a sandboxed browser environment
 - **Preload Script**: Provides secure bridge between main and renderer processes
 
 ### Key Configuration Files
+
 - `electron.vite.config.ts`: Vite configuration for all three process types
 - `tsconfig.json`: Base TypeScript configuration
 - `tsconfig.node.json`: TypeScript config for main/preload processes
@@ -73,19 +79,24 @@ src/
 ## Development Workflow
 
 ### Pre-commit Hooks
+
 The project uses Husky and lint-staged to ensure code quality:
+
 - ESLint fixes are applied automatically
 - Prettier formatting is enforced
 - TypeScript compilation is verified
 - Runs on staged files only for efficiency
 
 ### CI/CD
+
 GitHub Actions workflow (`.github/workflows/ci.yml`) runs on:
+
 - Pull requests to main
 - Pushes to main
 - Executes: `pnpm lint` and `pnpm build`
 
 ### Import Aliases
+
 - `@renderer`: Maps to `src/renderer/src/` for cleaner imports in renderer process
 
 ## Best Practices
