@@ -1,5 +1,7 @@
 import Versions from './components/Versions'
 import electronLogo from './assets/electron.svg'
+import { Button } from './components/ui/button'
+import { Badge } from './components/ui/badge'
 
 function App(): React.JSX.Element {
   const ipcHandle = (): void => window.electron.ipcRenderer.send('ping')
@@ -13,24 +15,17 @@ function App(): React.JSX.Element {
         &nbsp;and <span className="text-blue-500">TypeScript</span>
       </div>
       <p className="text-gray-300 mb-8">
-        Please try pressing <code className="px-2 py-1 bg-gray-800 rounded text-sm">F12</code> to
-        open the devTool
+        Please try pressing <Badge variant="secondary">F12</Badge> to open the devTool
       </p>
       <div className="flex gap-4">
-        <a
-          href="https://electron-vite.org/"
-          target="_blank"
-          rel="noreferrer"
-          className="px-6 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors"
-        >
-          Documentation
-        </a>
-        <button
-          onClick={ipcHandle}
-          className="px-6 py-2 bg-gray-700 hover:bg-gray-600 rounded-lg transition-colors cursor-pointer"
-        >
+        <Button variant="secondary" asChild>
+          <a href="https://electron-vite.org/" target="_blank" rel="noreferrer">
+            Documentation
+          </a>
+        </Button>
+        <Button variant="secondary" onClick={ipcHandle}>
           Send IPC
-        </button>
+        </Button>
       </div>
       <Versions />
     </div>

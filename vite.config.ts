@@ -20,9 +20,26 @@
  * @see https://github.com/shadcn-ui/ui/issues/4885
  * @see https://github.com/shadcn-ui/ui/issues/5005
  */
-import { defineConfig } from 'vite'
 import tailwindcss from '@tailwindcss/vite'
+import react from '@vitejs/plugin-react'
+import { defineConfig, externalizeDepsPlugin } from 'electron-vite'
+import { resolve } from 'path'
+import type { PluginOption } from 'vite'
 
 export default defineConfig({
-  plugins: [tailwindcss()]
+  main: {
+    plugins: [externalizeDepsPlugin()] as PluginOption[]
+  },
+  preload: {
+    plugins: [externalizeDepsPlugin()] as PluginOption[]
+  },
+  renderer: {
+    resolve: {
+      alias: {
+        '@': resolve('src/renderer/src'),
+        '@renderer': resolve('src/renderer/src')
+      }
+    },
+    plugins: [react(), tailwindcss()] as PluginOption[]
+  }
 })
