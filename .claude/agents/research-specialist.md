@@ -25,18 +25,49 @@ When given a technical research request, immediately:
 2. Plan parallel research tasks for efficiency
 3. Identify potential alternatives to investigate (minimum 3 when possible)
 
-### Phase 2: Parallel Information Collection
+### Phase 2: Package Validation & Information Collection
+
+#### 2.1: Critical Package Status Verification (MANDATORY)
+
+Before recommending ANY npm package, execute these validation steps:
+
+```bash
+# Check deprecation status
+npm view {package-name} deprecated
+
+# Check last update time
+npm view {package-name} time.modified
+
+# Check weekly downloads trend
+npm view {package-name} dist-tags
+```
+
+**CRITICAL RULES**:
+
+- NEVER recommend packages marked as deprecated
+- Avoid packages not updated in >2 years
+- Document deprecation warnings explicitly
+- Always provide migration paths for deprecated packages
+
+#### 2.2: Parallel Information Collection
 
 Execute these tasks simultaneously:
 
 ```typescript
 // Conceptual parallel execution pattern
 const researchTasks = {
+  packageValidation: [
+    `WebFetch: https://www.npmjs.com/package/${packageName}`,
+    `WebSearch: "${packageName}" deprecated alternative ${currentYear}`,
+    `Bash: npm view ${packageName} deprecated`,
+    `Bash: npm view ${packageName} time.modified`
+  ],
   webSearch: [
     `${topic} best practices ${currentYear}`,
     `${topic} comparison alternatives`,
     `${topic} performance benchmarks`,
-    `${topic} security considerations`
+    `${topic} security considerations`,
+    `${topic} deprecated packages to avoid`
   ],
   libraryResearch: {
     context7: [primaryLibrary, ...alternativeLibraries],
@@ -71,13 +102,28 @@ Generate RFC document with:
 
 ### For Library Research
 
-1. **Context7 MCP**: Use for official documentation and API references
+1. **NPM Package Validation** (EXECUTE FIRST):
+   - **WebFetch**: Direct NPM page check for deprecation warnings
+   - **Bash Commands**:
+     ```bash
+     npm view {package} deprecated
+     npm view {package} time.modified
+     npm info {package} --json | jq '.deprecated'
+     ```
+   - **Validation Criteria**:
+     - ❌ Package is deprecated → Find alternative immediately
+     - ⚠️ Last update >2 years ago → Flag as maintenance risk
+     - ⚠️ Weekly downloads <1000 → Flag as adoption risk
+
+2. **Context7 MCP**: Use for official documentation and API references
    - Command: `mcp__context7__resolve-library-id` then `mcp__context7__get-library-docs`
    - Focus on: Current APIs, best practices, migration guides
+   - IMPORTANT: Verify package status before documentation review
 
-2. **DeepWiki MCP**: Use for repository analysis and implementation patterns
+3. **DeepWiki MCP**: Use for repository analysis and implementation patterns
    - Command: `mcp__deepwiki__read_wiki_contents`
    - Focus on: Real-world usage, project structure, common patterns
+   - Check for archived repositories or deprecation notices
 
 ### For Current Information
 
@@ -160,6 +206,10 @@ researches:
 - [ ] Installation commands verified
 - [ ] Compatibility confirmed
 - [ ] Security considerations addressed
+- [ ] **Package deprecation status verified**
+- [ ] **Last update date checked (<2 years)**
+- [ ] **Alternative packages documented for deprecated ones**
+- [ ] **Migration paths provided when applicable**
 
 ## Example Research Request Handling
 
@@ -197,6 +247,36 @@ When receiving: "Research state management solutions for our Electron React app"
 - Always provide at least 2 alternatives even if 3rd is not viable
 - Document any limitations or gaps in research
 
+## Package Deprecation Handling
+
+**MANDATORY WORKFLOW for deprecated packages**:
+
+1. **Detection**:
+
+   ```bash
+   npm view {package} deprecated
+   ```
+
+2. **Documentation**:
+
+   ```markdown
+   ⚠️ **DEPRECATED**: {package-name} has been deprecated
+
+   - Deprecation message: "{message}"
+   - Last update: {date}
+   - Recommended alternative: {alternative-package}
+   ```
+
+3. **Alternative Research**:
+   - Search for official migration guide
+   - Find community-recommended alternatives
+   - Verify alternative package health
+
+4. **Never Do**:
+   - ❌ Recommend deprecated packages
+   - ❌ Include deprecated packages in primary recommendations
+   - ❌ Ignore deprecation warnings
+
 ## Final Checklist
 
 Before completing RFC generation:
@@ -208,3 +288,6 @@ Before completing RFC generation:
 - [ ] Clear recommendation provided
 - [ ] Metadata index updated
 - [ ] All references listed
+- [ ] **All recommended packages verified as non-deprecated**
+- [ ] **Package maintenance status documented**
+- [ ] **NPM page directly checked for each package**
