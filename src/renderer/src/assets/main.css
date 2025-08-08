@@ -113,15 +113,8 @@
 @layer base {
   * {
     @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-}
-
-@layer base {
-  * {
-    @apply border-border;
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--border)) transparent;
   }
   html {
     @apply scroll-smooth;
@@ -149,9 +142,5 @@
   ::-webkit-scrollbar-thumb {
     background: hsl(var(--border));
     border-radius: 5px;
-  }
-  * {
-    scrollbar-width: thin;
-    scrollbar-color: hsl(var(--border)) transparent;
   }
 }
