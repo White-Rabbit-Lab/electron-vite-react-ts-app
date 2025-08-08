@@ -13,6 +13,8 @@ This is an Electron application with React and TypeScript, built using Vite and 
 - **TypeScript**: Type-safe JavaScript
 - **Vite**: Build tool and dev server
 - **electron-vite**: Electron-specific Vite configuration
+- **Tailwind CSS v4**: Utility-first CSS framework
+- **shadcn/ui**: React component library built on Radix UI
 - **pnpm**: Package manager
 
 ## Commands
@@ -60,7 +62,9 @@ src/
     └── src/
         ├── main.tsx      # React entry point
         ├── App.tsx       # Root React component
-        └── components/   # React components
+        ├── components/   # React components
+        │   └── ui/       # shadcn/ui components
+        └── lib/          # Utility functions
 ```
 
 ### Process Architecture
@@ -72,7 +76,9 @@ src/
 ### Key Configuration Files
 
 - `electron.vite.config.ts`: Vite configuration for all three process types
-- `tsconfig.json`: Base TypeScript configuration
+- `vite.config.ts`: Shim file for shadcn/ui CLI compatibility (mirrors electron.vite.config.ts)
+- `components.json`: shadcn/ui component configuration
+- `tsconfig.json`: Base TypeScript configuration with path aliases
 - `tsconfig.node.json`: TypeScript config for main/preload processes
 - `tsconfig.web.json`: TypeScript config for renderer process
 
@@ -98,6 +104,7 @@ GitHub Actions workflow (`.github/workflows/ci.yml`) runs on:
 ### Import Aliases
 
 - `@renderer`: Maps to `src/renderer/src/` for cleaner imports in renderer process
+- `@/`: Also maps to `src/renderer/src/` (for shadcn/ui compatibility)
 
 ## Best Practices
 
@@ -106,3 +113,25 @@ GitHub Actions workflow (`.github/workflows/ci.yml`) runs on:
 3. **Process Separation**: Keep main process logic separate from renderer
 4. **Security**: Use preload scripts for IPC, never expose Node.js APIs directly to renderer
 5. **Testing**: Run `pnpm lint` to verify code quality before building
+
+## UI Development
+
+### Adding shadcn/ui Components
+
+```bash
+pnpm dlx shadcn@latest add <component-name>
+```
+
+Components are installed to `src/renderer/src/components/ui/` and can be imported using:
+
+```typescript
+import { Button } from '@/components/ui/button'
+// or
+import { Button } from '@renderer/components/ui/button'
+```
+
+### Styling
+
+- **Tailwind CSS v4**: Use utility classes for styling
+- **CSS Variables**: Theme colors are defined as CSS variables in `main.css`
+- **Component Variants**: Use CVA (class-variance-authority) for component variants
