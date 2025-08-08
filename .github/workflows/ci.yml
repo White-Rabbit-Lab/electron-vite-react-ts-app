@@ -30,4 +30,8 @@ jobs:
 
       - run: pnpm run lint
 
+      - name: Validate commit messages
+        if: github.event_name == 'pull_request'
+        run: pnpm exec commitlint --from ${{ github.event.pull_request.base.sha }} --to ${{ github.event.pull_request.head.sha }}
+
       - run: pnpm run build
