@@ -1,0 +1,135 @@
+# RFC Document Index
+# This file tracks all RFC (Request for Comments) documents in the system
+# Automatically updated when new RFCs are created or modified
+
+metadata:
+  version: '1.0.0'
+  last_updated: '2025-01-08'
+  description: 'Index of technical research and RFC documents'
+
+# Document status definitions
+status_definitions:
+  in-progress: 'Currently being researched and written'
+  completed: 'Research complete, ready for review'
+  accepted: 'Reviewed and accepted for implementation'
+  implemented: 'Decision implemented in codebase'
+  superseded: 'Replaced by newer RFC'
+  archived: 'No longer relevant but kept for historical reference'
+
+# Tag categories for organization
+tag_categories:
+  technical_area:
+    - frontend
+    - backend
+    - electron-main
+    - electron-renderer
+    - electron-preload
+    - devops
+    - testing
+    - security
+    - performance
+
+  component_type:
+    - state-management
+    - routing
+    - data-fetching
+    - authentication
+    - ipc-communication
+    - ui-components
+    - build-system
+    - deployment
+
+  decision_type:
+    - library-selection
+    - architecture-pattern
+    - tool-adoption
+    - process-improvement
+    - optimization
+    - migration
+
+# Research documents
+researches:
+  # Example entry (will be populated as RFCs are created):
+  # - id: "2025-01-08-ipc-type-safety"
+  #   title: "Type-Safe IPC Communication in Electron"
+  #   status: "completed"
+  #   created: "2025-01-08"
+  #   updated: "2025-01-08"
+  #   author: "claude-code"
+  #   adr_ref: "2025-01-08-typed-ipc-adoption"  # Link to resulting ADR
+  #   tags:
+  #     - electron-main
+  #     - electron-renderer
+  #     - ipc-communication
+  #     - library-selection
+  #   summary: "Comprehensive comparison of typed-ipc, electron-trpc, and electron-better-ipc for type-safe IPC"
+  #   alternatives_evaluated:
+  #     - typed-ipc
+  #     - electron-trpc
+  #     - electron-better-ipc
+  #     - custom-implementation
+  #   recommendation: "typed-ipc"
+  #   implementation_effort: "medium"  # low, medium, high
+  #   priority: "high"  # low, medium, high, critical
+
+# Statistics tracking
+statistics:
+  total_rfcs: 0
+  by_status:
+    in-progress: 0
+    completed: 0
+    accepted: 0
+    implemented: 0
+    superseded: 0
+    archived: 0
+  by_year:
+    '2025': 0
+  average_research_time_hours: 0
+  implementation_success_rate: 0
+
+# Upcoming research topics (backlog)
+research_backlog:
+  # - topic: "Testing Framework Selection"
+  #   priority: "high"
+  #   requested_by: "team"
+  #   target_date: "2025-01-15"
+  #   requirements:
+  #     - "Support for Electron main/renderer testing"
+  #     - "TypeScript support"
+  #     - "Good IDE integration"
+
+# Research templates and patterns identified
+common_patterns:
+  library_selection:
+    evaluation_criteria:
+      - typescript_support
+      - bundle_size
+      - performance
+      - community_support
+      - documentation_quality
+      - maintenance_status
+      - security_record
+
+  architecture_pattern:
+    evaluation_criteria:
+      - scalability
+      - maintainability
+      - testability
+      - performance_impact
+      - learning_curve
+      - team_expertise_fit
+
+# Integration settings
+integrations:
+  adr_directory: '../adr'
+  template_directory: '../_templates'
+  auto_update_on_commit: true
+  generate_monthly_report: true
+
+# Automation configuration
+automation:
+  research_agent: '@.claude/agents/research-specialist.md'
+  default_research_timeout_minutes: 30
+  parallel_research_limit: 5
+  auto_tag_extraction: true
+  auto_summary_generation: true
