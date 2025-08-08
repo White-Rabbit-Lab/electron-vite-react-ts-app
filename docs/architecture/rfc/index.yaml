@@ -4,7 +4,7 @@
 
 metadata:
   version: '1.0.0'
-  last_updated: '2025-01-08'
+  last_updated: '2025-08-08'
   description: 'Index of technical research and RFC documents'
 
 # Document status definitions
@@ -49,6 +49,27 @@ tag_categories:
 
 # Research documents
 researches:
+  - id: '2025-08-08-i18n-strategy'
+    title: 'Internationalization (i18n) Strategy for Electron-Vite React TypeScript Application'
+    status: 'in-progress'
+    created: '2025-08-08'
+    updated: '2025-08-08'
+    author: 'claude-code'
+    tags:
+      - electron-renderer
+      - electron-main
+      - frontend
+      - library-selection
+      - ui-components
+    summary: 'Comprehensive evaluation of i18n strategies including react-i18next, FormatJS, and LinguiJS for Electron apps'
+    alternatives_evaluated:
+      - react-i18next
+      - formatjs-react-intl
+      - linguijs
+    recommendation: 'react-i18next'
+    implementation_effort: 'medium'
+    priority: 'high'
+
   # Example entry (will be populated as RFCs are created):
   # - id: "2025-01-08-ipc-type-safety"
   #   title: "Type-Safe IPC Communication in Electron"
@@ -74,16 +95,16 @@ researches:
 
 # Statistics tracking
 statistics:
-  total_rfcs: 0
+  total_rfcs: 1
   by_status:
-    in-progress: 0
+    in-progress: 1
     completed: 0
     accepted: 0
     implemented: 0
     superseded: 0
     archived: 0
   by_year:
-    '2025': 0
+    '2025': 1
   average_research_time_hours: 0
   implementation_success_rate: 0
 
