@@ -300,7 +300,7 @@ graph TD
 
 Examples:
 
-- Related RFC: @docs/architecture/decisions/{YYYY-MM-DD}-{slug}.md
+- Related decisions: @docs/architecture/decisions/{YYYY-MM-DD}-{slug}.md
 - https://example.com/relevant-article (external reference)
 
 ## Appendix
@@ -312,10 +312,6 @@ Examples:
 {Query 2}
 {Query 3}
 ```
-
-### Raw Performance Data
-
-{Optional: Include benchmarks, test results, or other raw data}
 
 ### Additional Notes
 
